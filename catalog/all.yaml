@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: tna-catalog
+  description: All National Archives Backstage catalog entities
+spec:
+  targets:
+    - ./systems/tna-website.yaml
+    - ./components/ds-wagtail.yaml
+    - ./components/ds-frontend.yaml
+    - ./apis/wagtail-api.yaml

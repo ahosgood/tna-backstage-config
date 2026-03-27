@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ds-wagtail
+  title: TNA Wagtail CMS
+  description: >
+    Django/Wagtail content management system for The National Archives website.
+    Provides the Wagtail REST API consumed by the ds-frontend application.
+  annotations:
+    github.com/project-slug: nationalarchives/ds-wagtail
+    backstage.io/techdocs-ref: url:https://nationalarchives.github.io/ds-wagtail
+  tags:
+    - python
+    - django
+    - wagtail
+    - cms
+spec:
+  type: service
+  lifecycle: production
+  owner: group:default/nationalarchives
+  system: tna-website
+  providesApis:
+    - wagtail-api
