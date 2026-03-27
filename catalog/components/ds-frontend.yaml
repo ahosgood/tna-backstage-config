@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ds-frontend
+  title: nationalarchives.gov.uk Frontend
+  description: >
+    Flask-based frontend application for nationalarchives.gov.uk.
+    Consumes the Wagtail REST API provided by ds-wagtail to render content pages.
+  annotations:
+    github.com/project-slug: nationalarchives/ds-frontend
+    backstage.io/techdocs-ref: url:https://nationalarchives.github.io/ds-frontend
+  tags:
+    - python
+    - flask
+    - frontend
+    - website
+spec:
+  type: website
+  lifecycle: production
+  owner: group:default/nationalarchives
+  system: tna-website
+  consumesApis:
+    - wagtail-api

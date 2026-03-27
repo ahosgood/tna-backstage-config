@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: tna-website
+  title: TNA Website
+  description: >
+    The National Archives website, comprising a Wagtail CMS backend providing
+    a content API and a Flask-based frontend application.
+  tags:
+    - website
+    - cms
+spec:
+  owner: group:default/nationalarchives

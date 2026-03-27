@@ -1,0 +1,265 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: wagtail-api
+  title: Wagtail API
+  description: >
+    REST API provided by the ds-wagtail CMS. Exposes pages, images, and
+    documents for consumption by ds-frontend and other integrating services.
+    The API base path is /api/v2/.
+  annotations:
+    github.com/project-slug: nationalarchives/ds-wagtail
+  tags:
+    - rest
+    - cms
+    - wagtail
+spec:
+  type: openapi
+  lifecycle: production
+  owner: group:default/nationalarchives
+  system: tna-website
+  definition: |
+    openapi: "3.0.3"
+    info:
+      title: Wagtail API
+      description: >
+        The Wagtail REST API (v2) served by the ds-wagtail CMS. Provides access
+        to pages, images, and documents managed in the Wagtail admin.
+      version: "2"
+    servers:
+      - url: /api/v2
+        description: Wagtail API v2
+    paths:
+      /pages/:
+        get:
+          summary: List pages
+          description: Returns a paginated list of published Wagtail pages.
+          parameters:
+            - name: type
+              in: query
+              description: Filter by page type (e.g. home.HomePage)
+              schema:
+                type: string
+            - name: fields
+              in: query
+              description: Comma-separated list of fields to include in the response
+              schema:
+                type: string
+            - name: search
+              in: query
+              description: Full-text search query
+              schema:
+                type: string
+            - name: limit
+              in: query
+              description: Maximum number of results to return
+              schema:
+                type: integer
+                default: 20
+            - name: offset
+              in: query
+              description: Number of results to skip
+              schema:
+                type: integer
+                default: 0
+          responses:
+            "200":
+              description: A paginated list of pages
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/PageList"
+      /pages/{id}/:
+        get:
+          summary: Get a page by ID
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: integer
+            - name: fields
+              in: query
+              description: Comma-separated list of fields to include
+              schema:
+                type: string
+          responses:
+            "200":
+              description: A single page
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Page"
+            "404":
+              description: Page not found
+      /images/:
+        get:
+          summary: List images
+          parameters:
+            - name: limit
+              in: query
+              schema:
+                type: integer
+                default: 20
+            - name: offset
+              in: query
+              schema:
+                type: integer
+                default: 0
+          responses:
+            "200":
+              description: A paginated list of images
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/ImageList"
+      /images/{id}/:
+        get:
+          summary: Get an image by ID
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: integer
+          responses:
+            "200":
+              description: A single image
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Image"
+            "404":
+              description: Image not found
+      /documents/:
+        get:
+          summary: List documents
+          parameters:
+            - name: limit
+              in: query
+              schema:
+                type: integer
+                default: 20
+            - name: offset
+              in: query
+              schema:
+                type: integer
+                default: 0
+          responses:
+            "200":
+              description: A paginated list of documents
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/DocumentList"
+      /documents/{id}/:
+        get:
+          summary: Get a document by ID
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: integer
+          responses:
+            "200":
+              description: A single document
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/Document"
+            "404":
+              description: Document not found
+    components:
+      schemas:
+        PageList:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                total_count:
+                  type: integer
+            items:
+              type: array
+              items:
+                $ref: "#/components/schemas/Page"
+        Page:
+          type: object
+          properties:
+            id:
+              type: integer
+            meta:
+              type: object
+              properties:
+                type:
+                  type: string
+                detail_url:
+                  type: string
+                html_url:
+                  type: string
+                slug:
+                  type: string
+                first_published_at:
+                  type: string
+                  format: date-time
+            title:
+              type: string
+        ImageList:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                total_count:
+                  type: integer
+            items:
+              type: array
+              items:
+                $ref: "#/components/schemas/Image"
+        Image:
+          type: object
+          properties:
+            id:
+              type: integer
+            meta:
+              type: object
+              properties:
+                type:
+                  type: string
+                detail_url:
+                  type: string
+            title:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+        DocumentList:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                total_count:
+                  type: integer
+            items:
+              type: array
+              items:
+                $ref: "#/components/schemas/Document"
+        Document:
+          type: object
+          properties:
+            id:
+              type: integer
+            meta:
+              type: object
+              properties:
+                type:
+                  type: string
+                detail_url:
+                  type: string
+                download_url:
+                  type: string
+            title:
+              type: string
