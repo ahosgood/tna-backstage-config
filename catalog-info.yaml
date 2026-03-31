@@ -1,7 +1,7 @@
 app:
   title: The National Archives Backstage
   baseUrl: http://localhost:3000
-  apiVersion: v1
+  apiVersion: backstage.io/v1alpha1
 
 organization:
   name: The National Archives
