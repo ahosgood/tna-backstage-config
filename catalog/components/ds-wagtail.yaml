@@ -23,3 +23,4 @@ spec:
     - wagtail-api
   dependsOn:
     - resource:wagtail-db
+    - api:rosetta-api

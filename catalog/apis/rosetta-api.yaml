@@ -12,4 +12,16 @@ spec:
   lifecycle: production
   owner: group:default/nationalarchives
   system: ciim
+  definition: |
+    openapi: "3.0.3"
+    info:
+      title: Rosetta API
+      description: >
+        The Rosetta REST API (v2) served by the CIIM system. Provides access
+        to records managed in the CIIM system.
+      version: "2"
+    servers:
+      - url: /api/v2
+        description: Rosetta API v2
+    paths:
   
