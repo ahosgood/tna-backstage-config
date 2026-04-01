@@ -21,3 +21,5 @@ spec:
   system: tna-website
   providesApis:
     - wagtail-api
+  dependsOn:
+    - resource:wagtail-db
