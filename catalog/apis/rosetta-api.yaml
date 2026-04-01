@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: rosetta-api
+  title: Rosetta API
+  description: >
+    Records from CIIM
+  tags:
+    - rest
+spec:
+  type: openapi
+  lifecycle: production
+  owner: group:default/nationalarchives
+  system: ciim
+  

@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: ciim
+  title: CIIM
+  description: >
+    The CIIM system
+  tags:
+    - records
+spec:
+  owner: group:default/kint
