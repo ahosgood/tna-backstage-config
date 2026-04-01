@@ -9,3 +9,4 @@ spec:
     - ./components/ds-wagtail.yaml
     - ./components/ds-frontend.yaml
     - ./apis/wagtail-api.yaml
+    - ./resources/wagtail-db.yaml
