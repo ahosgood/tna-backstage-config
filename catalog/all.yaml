@@ -6,7 +6,9 @@ metadata:
 spec:
   targets:
     - ./systems/tna-website.yaml
+    - ./systems/ciim.yaml
     - ./components/ds-wagtail.yaml
     - ./components/ds-frontend.yaml
     - ./apis/wagtail-api.yaml
+    - ./apis/rosetta-api.yaml
     - ./resources/wagtail-db.yaml
