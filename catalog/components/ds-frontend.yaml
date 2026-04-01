@@ -21,3 +21,5 @@ spec:
   system: tna-website
   consumesApis:
     - wagtail-api
+  dependsOn:
+    - service:default/ds-wagtail
